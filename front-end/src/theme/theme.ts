@@ -1,18 +1,19 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, Theme } from "@mui/material/styles";
 
-const theme = createTheme({
+export const lightTheme: Theme = createTheme({
   palette: {
-    mode: "dark",
-    primary: {
-      main: "#1976d2",
-    },
-    secondary: {
-      main: "#9c27b0",
-    },
+    mode: "light",
+    primary: { main: "#1976d2" },
+    secondary: { main: "#9c27b0" },
   },
-  typography: {
-    fontFamily: "Roboto, sans-serif",
-  },
+  typography: { fontFamily: "Roboto, sans-serif" },
 });
 
-export default theme;
+export const darkTheme: Theme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: { main: "#1976d2" },
+    secondary: { main: "#9c27b0" },
+  },
+  typography: { fontFamily: "Roboto, sans-serif" },
+});

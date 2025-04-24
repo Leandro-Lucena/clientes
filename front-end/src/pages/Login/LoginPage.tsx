@@ -1,16 +1,21 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { Card, SignInContainer } from "./styles";
+import { ColorModeContext } from "../../theme/ColorModeContext";
 import { login } from "../../services/authService";
-import { FormEvent, useState } from "react";
-import { Snackbar } from "@mui/material";
+import { FormEvent, useContext, useState } from "react";
+import { LoginSnackbarError } from "./components/LoginSnackbarError";
+import { SignInContainer } from "./components/SignInContainer";
+import { StyledCard } from "./components/StyledCard";
+import { ThemeSwitch } from "../../components/ThemeSwitch";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const { mode, toggleColorMode } = useContext(ColorModeContext);
+  const navigate = useNavigate();
   const [usernameError, setUsernameError] = useState(false);
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
   const [passwordError, setPasswordError] = useState(false);
@@ -31,7 +36,7 @@ export default function LoginPage() {
 
     try {
       await login(username, password);
-      window.location.href = "/clients";
+      navigate("/clients");
     } catch (error: any) {
       setSnackbarMessage("Erro ao fazer login: " + error.message);
       setOpenSnackbar(true);
@@ -67,21 +72,25 @@ export default function LoginPage() {
 
   return (
     <SignInContainer direction="column" justifyContent="space-between">
-      <CssBaseline enableColorScheme />
-      <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      <LoginSnackbarError
         open={openSnackbar}
-        autoHideDuration={3000}
-        onClose={() => setOpenSnackbar(false)}
         message={snackbarMessage}
+        onClose={() => setOpenSnackbar(false)}
       />
-      <Card variant="outlined">
+      <StyledCard variant="outlined">
         <Typography
           component="h1"
           variant="h4"
-          sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
+          sx={{
+            width: "100%",
+            fontSize: "clamp(2rem, 10vw, 2.15rem)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
         >
           Login
+          <ThemeSwitch checked={mode === "dark"} onChange={toggleColorMode} />
         </Typography>
         <Box
           component="form"
@@ -136,7 +145,7 @@ export default function LoginPage() {
             Entrar
           </Button>
         </Box>
-      </Card>
+      </StyledCard>
     </SignInContainer>
   );
 }

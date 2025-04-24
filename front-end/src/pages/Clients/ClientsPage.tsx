@@ -1,16 +1,32 @@
-import { Box, Button, Typography } from "@mui/material";
-import ClientsTable from "./ClientsTable";
+import { Box, Button, Typography, Stack } from "@mui/material";
+import ClientsTable from "./components/ClientsTable";
+import UserMenu from "./components/UserMenu";
 
 const ClientsPage = () => {
   return (
-    <Box p={4}>
-      <Typography variant="h4" gutterBottom>
-        Clientes
-      </Typography>
-      <Button variant="contained" color="primary" sx={{ mb: 2 }}>
-        Novo Cliente
-      </Button>
-      <ClientsTable />
+    <Box
+      p={4}
+      sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        mb={2}
+      >
+        <Typography variant="h4">Clientes</Typography>
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <Button variant="contained">Novo Cliente</Button>
+          <UserMenu />
+        </Stack>
+      </Stack>
+      <Box sx={{ flexGrow: 1 }}>
+        <ClientsTable />
+      </Box>
     </Box>
   );
 };
