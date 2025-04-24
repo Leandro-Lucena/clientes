@@ -2,10 +2,21 @@ import Paper from "@mui/material/Paper";
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { Client } from "@/types";
-import { getClients } from "../../../services/clientService";
+import {
+  deleteClient,
+  getClients,
+  updateClient,
+} from "../../../services/clientService";
 import DeleteClient from "./DeleteClient";
+import EditClient from "./EditClient";
 
-export default function ClientsTable() {
+interface ClientsTableProps {
+  handleSnackbarOpen: (message: string, severity: "success" | "error") => void;
+}
+
+export default function ClientsTable({
+  handleSnackbarOpen,
+}: ClientsTableProps) {
   const [rows, setRows] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -19,6 +30,10 @@ export default function ClientsTable() {
         }
       })
       .catch((err) => {
+        handleSnackbarOpen(
+          "Erro ao buscar clientes. Tente novamente mais tarde.",
+          "error"
+        );
         console.error("Erro ao buscar clientes:", err);
       })
       .finally(() => {
@@ -30,12 +45,40 @@ export default function ClientsTable() {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [handleSnackbarOpen]);
 
   const handleDeleteClient = async (clientId: number) => {
-    // await deleteClient(clientId);
-    // Atualiza o estado removendo o cliente da lista
-    setRows((prev) => prev.filter((client) => client.id !== clientId));
+    try {
+      const response = await deleteClient(clientId);
+      handleSnackbarOpen(response.message, "success");
+    } catch (error) {
+      handleSnackbarOpen(
+        "Erro ao excluir cliente. Tente novamente mais tarde.",
+        "error"
+      );
+      console.error("Erro ao excluir cliente:", error);
+      return;
+    }
+  };
+
+  const handleEditClient = async (
+    clientId: number,
+    updatedClient: Partial<Client>
+  ) => {
+    try {
+      const response = await updateClient(clientId, updatedClient);
+      handleSnackbarOpen(
+        "Usuário " + response.name + " editado com sucesso.",
+        "success"
+      );
+    } catch (error) {
+      handleSnackbarOpen(
+        "Erro ao editar cliente. Tente novamente mais tarde.",
+        "error"
+      );
+      console.error("Erro ao editar cliente:", error);
+      return;
+    }
   };
 
   const columns: GridColDef[] = [
@@ -51,7 +94,10 @@ export default function ClientsTable() {
       filterable: false,
       width: 80,
       renderCell: (params: GridRenderCellParams) => (
-        <DeleteClient client={params.row} onDelete={handleDeleteClient} />
+        <>
+          <EditClient client={params.row} onEdit={handleEditClient} />
+          <DeleteClient client={params.row} onDelete={handleDeleteClient} />
+        </>
       ),
     },
   ];
@@ -65,6 +111,10 @@ export default function ClientsTable() {
         autoPageSize
         sx={{ border: 0 }}
         disableColumnMenu
+        localeText={{
+          paginationDisplayedRows: ({ from, to, count }) =>
+            `${from} até ${to} de ${count}`,
+        }}
       />
     </Paper>
   );

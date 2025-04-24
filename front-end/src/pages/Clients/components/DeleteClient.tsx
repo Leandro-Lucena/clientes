@@ -22,21 +22,16 @@ export default function DeleteClient({ client, onDelete }: DeleteClientProps) {
 
   const handleDelete = async () => {
     setLoading(true);
-    try {
-      onDelete(client.id);
-      setOpen(false);
-    } catch (error) {
-      console.error("Erro ao excluir cliente:", error);
-    } finally {
-      setLoading(false); // Desativa o estado de carregamento
-    }
+    onDelete(client.id);
+    setOpen(false);
+    setLoading(false);
   };
 
   return (
     <div>
-      {/* Botão de exclusão que abrirá o diálogo */}
       <IconButton
-        aria-label="excluir"
+        aria-label="Excluir cliente"
+        title="Excluir cliente"
         size="small"
         onClick={() => setOpen(true)}
         color="error"
@@ -44,7 +39,6 @@ export default function DeleteClient({ client, onDelete }: DeleteClientProps) {
         <DeleteIcon fontSize="small" />
       </IconButton>
 
-      {/* Caixa de diálogo de confirmação */}
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Confirmar Exclusão</DialogTitle>
         <DialogContent>
@@ -52,14 +46,15 @@ export default function DeleteClient({ client, onDelete }: DeleteClientProps) {
           {loading && <CircularProgress />}
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => setOpen(false)}
-            color="secondary"
-            disabled={loading}
-          >
+          <Button onClick={() => setOpen(false)} disabled={loading}>
             Cancelar
           </Button>
-          <Button onClick={handleDelete} color="primary" disabled={loading}>
+          <Button
+            onClick={handleDelete}
+            variant="contained"
+            color="error"
+            disabled={loading}
+          >
             {loading ? "Excluindo..." : "Excluir"}
           </Button>
         </DialogActions>

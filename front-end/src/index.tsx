@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ColorModeProvider } from "./theme/ColorModeContext";
-import AppRoutes from "./routes";
+import AppRoutes from "./routes/AppRoutes";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

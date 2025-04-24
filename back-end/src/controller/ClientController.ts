@@ -54,4 +54,18 @@ export class ClientController {
     const clients = await clientRepository.find();
     res.status(200).json(clients);
   }
+
+  static async deleteClient(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const clientRepository = AppDataSource.getRepository(Client);
+    const client = await clientRepository.findOneBy({ id: parseInt(id) });
+
+    if (!client) {
+      res.status(404).json({ message: "Cliente não encontrado" });
+      return;
+    }
+
+    await clientRepository.remove(client);
+    res.status(200).json({ message: "Cliente excluido com sucesso" });
+  }
 }
