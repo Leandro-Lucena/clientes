@@ -5,7 +5,7 @@ import {
   Text,
   View,
   StyleSheet,
-  PDFDownloadLink,
+  pdf,
 } from "@react-pdf/renderer";
 import { Client } from "@/types";
 
@@ -44,9 +44,7 @@ const styles = StyleSheet.create({
   tableCellHeader: {
     fontWeight: "bold",
   },
-  tableCell: {
-    // texto normal
-  },
+  tableCell: {},
 });
 
 interface Props {
@@ -98,17 +96,20 @@ const ClientsReportPDF: React.FC<Props> = ({ data }) => (
   </Document>
 );
 
-export default function ClientsReportPDFDownloadButton({
-  clients,
-}: {
-  clients: Client[];
-}) {
-  return (
-    <PDFDownloadLink
-      document={<ClientsReportPDF data={clients} />}
-      fileName="clientes.pdf"
-    >
-      Baixar PDF
-    </PDFDownloadLink>
-  );
+function downloadBlob(blob: Blob, fileName: string) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+export async function exportPDF(clients: Client[]) {
+  const doc = <ClientsReportPDF data={clients} />;
+  const asPdf = pdf(doc);
+  const blob = await asPdf.toBlob();
+  downloadBlob(blob, "clientes.pdf");
 }

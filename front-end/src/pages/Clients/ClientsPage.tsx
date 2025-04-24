@@ -1,26 +1,40 @@
-import { Box, Typography, Stack, Snackbar, Slide, Alert } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Stack,
+  Snackbar,
+  Slide,
+  Alert,
+  Button,
+} from "@mui/material";
 import ClientsTable from "./components/ClientsTable";
 import UserMenu from "./components/UserMenu";
 import { useEffect, useState } from "react";
 import AddClient from "./components/AddClient";
 import { Client } from "@/types";
 import { createClient, getClients } from "../../services/clientService";
-import ClientsReportPDFDownloadButton from "./components/ClientsReportPDF";
+import { exportPDF } from "./components/ClientsReportPDF";
 
 const ClientsPage = () => {
   const [rows, setRows] = useState<Client[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [message, setMessage] = useState("Mensagem de teste");
   const [severity, setSeverity] = useState<"success" | "error">("success");
-
   useEffect(() => {
-    getClients()
-      .then((data) => setRows(data))
-      .catch((err) => handleSnackbarOpen("Erro ao buscar clientes.", "error"))
-      .finally(() => setLoading(false));
-  }, []);
-
+    const fetchClients = async () => {
+      try {
+        const data = await getClients();
+        setRows(data);
+      } catch (err) {
+        handleSnackbarOpen("Erro ao buscar clientes.", "error");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchClients();
+  }, [openSnackbar]);
   const handleSnackbarOpen = (
     message: string,
     severity: "success" | "error"
@@ -29,6 +43,7 @@ const ClientsPage = () => {
     setSeverity(severity);
     setOpenSnackbar(true);
   };
+
   const handleSnackbarClose = () => {
     setOpenSnackbar(false);
   };
@@ -41,12 +56,23 @@ const ClientsPage = () => {
         "success"
       );
     } catch (error) {
-      handleSnackbarOpen(
-        "Erro ao criar cliente. Tente novamente mais tarde.",
-        "error"
-      );
-      console.error("Erro ao criar cliente:", error);
-      return;
+      const errorMessage =
+        (error instanceof Error && error.message) ||
+        "Erro ao criar cliente. Tente novamente mais tarde.";
+
+      handleSnackbarOpen(errorMessage, "error");
+      console.error("Erro ao criar cliente:", errorMessage);
+    }
+  };
+
+  const handleExportPDF = async () => {
+    setLoading(true);
+    try {
+      await exportPDF(rows);
+    } catch (err) {
+      handleSnackbarOpen("Erro ao gerar PDF: " + err, "error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -73,7 +99,10 @@ const ClientsPage = () => {
           onClose={handleSnackbarClose}
           severity={severity}
           variant="filled"
-          sx={{ width: "100%" }}
+          sx={{
+            width: "100%",
+            color: "#ffffff",
+          }}
         >
           {message}
         </Alert>
@@ -87,7 +116,7 @@ const ClientsPage = () => {
         <Typography variant="h4">Clientes</Typography>
         <Stack direction="row" alignItems="center" spacing={2}>
           <AddClient onAdd={handleCreateClient} />
-          <ClientsReportPDFDownloadButton clients={rows} />
+          <Button onClick={handleExportPDF}>Exportar PDF</Button>
           <UserMenu />
         </Stack>
       </Stack>
@@ -97,7 +126,6 @@ const ClientsPage = () => {
           rows={rows}
           setRows={setRows}
           loading={loading}
-          setLoading={setLoading}
         />
       </Box>
     </Box>

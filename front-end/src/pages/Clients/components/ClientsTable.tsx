@@ -1,21 +1,15 @@
 import Paper from "@mui/material/Paper";
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
-import { useEffect } from "react";
 import { Client } from "@/types";
-import {
-  deleteClient,
-  getClients,
-  updateClient,
-} from "../../../services/clientService";
+import { deleteClient, updateClient } from "../../../services/clientService";
 import DeleteClient from "./DeleteClient";
 import EditClient from "./EditClient";
 
 interface ClientsTableProps {
   handleSnackbarOpen: (message: string, severity: "success" | "error") => void;
   rows: Client[];
-  setRows: (rows: Client[]) => void;
+  setRows: React.Dispatch<React.SetStateAction<Client[]>>;
   loading: boolean;
-  setLoading: (loading: boolean) => void;
 }
 
 export default function ClientsTable({
@@ -23,38 +17,11 @@ export default function ClientsTable({
   rows,
   setRows,
   loading,
-  setLoading,
 }: ClientsTableProps) {
-  useEffect(() => {
-    let mounted = true;
-
-    getClients()
-      .then((data) => {
-        if (mounted) {
-          setRows(data);
-        }
-      })
-      .catch((err) => {
-        handleSnackbarOpen(
-          "Erro ao buscar clientes. Tente novamente mais tarde.",
-          "error"
-        );
-        console.error("Erro ao buscar clientes:", err);
-      })
-      .finally(() => {
-        if (mounted) {
-          setLoading(false);
-        }
-      });
-
-    return () => {
-      mounted = false;
-    };
-  }, [handleSnackbarOpen, setLoading, setRows]);
-
   const handleDeleteClient = async (clientId: number) => {
     try {
       const response = await deleteClient(clientId);
+      setRows(rows.filter((row) => row.id !== clientId));
       handleSnackbarOpen(response.message, "success");
     } catch (error) {
       handleSnackbarOpen(
@@ -77,12 +44,12 @@ export default function ClientsTable({
         "success"
       );
     } catch (error) {
-      handleSnackbarOpen(
-        "Erro ao editar cliente. Tente novamente mais tarde.",
-        "error"
-      );
-      console.error("Erro ao editar cliente:", error);
-      return;
+      const errorMessage =
+        (error instanceof Error && error.message) ||
+        "Erro ao editar cliente. Tente novamente mais tarde.";
+
+      handleSnackbarOpen(errorMessage, "error");
+      console.error("Erro ao editar cliente:", errorMessage);
     }
   };
 
@@ -118,6 +85,7 @@ export default function ClientsTable({
         autoPageSize
         sx={{ border: 0 }}
         disableColumnMenu
+        getRowId={(row) => row.id}
         localeText={{
           paginationDisplayedRows: ({ from, to, count }) =>
             `${from} até ${to} de ${count}`,

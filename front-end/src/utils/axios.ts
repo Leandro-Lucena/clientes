@@ -20,10 +20,18 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response?.status === 401 || err.response?.status === 403) {
+    const status = err.response?.status;
+    const data = err.response?.data as { message?: string };
+
+    if (status === 401 || status === 403) {
       sessionStorage.removeItem("token");
       window.location.href = "/login";
     }
+
+    if (status === 400 && data?.message) {
+      return Promise.reject(new Error(data.message));
+    }
+
     return Promise.reject(err);
   }
 );
