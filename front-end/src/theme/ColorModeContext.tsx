@@ -14,7 +14,7 @@ interface ContextProps {
 }
 
 export const ColorModeContext = createContext<ContextProps>({
-  mode: "light",
+  mode: "dark",
   toggleColorMode: () => {},
 });
 

@@ -28,4 +28,12 @@ router.get("/", auth_middleware_1.authMiddleware, async (req, res, next) => {
         next(error);
     }
 });
+router.delete("/:id", auth_middleware_1.authMiddleware, async (req, res, next) => {
+    try {
+        await ClientController_1.ClientController.deleteClient(req, res);
+    }
+    catch (error) {
+        next(error);
+    }
+});
 exports.default = router;

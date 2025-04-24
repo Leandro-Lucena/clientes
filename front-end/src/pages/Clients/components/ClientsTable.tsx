@@ -1,6 +1,6 @@
 import Paper from "@mui/material/Paper";
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Client } from "@/types";
 import {
   deleteClient,
@@ -12,14 +12,19 @@ import EditClient from "./EditClient";
 
 interface ClientsTableProps {
   handleSnackbarOpen: (message: string, severity: "success" | "error") => void;
+  rows: Client[];
+  setRows: (rows: Client[]) => void;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
 }
 
 export default function ClientsTable({
   handleSnackbarOpen,
+  rows,
+  setRows,
+  loading,
+  setLoading,
 }: ClientsTableProps) {
-  const [rows, setRows] = useState<Client[]>([]);
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     let mounted = true;
 
@@ -45,7 +50,7 @@ export default function ClientsTable({
     return () => {
       mounted = false;
     };
-  }, [handleSnackbarOpen]);
+  }, [handleSnackbarOpen, setLoading, setRows]);
 
   const handleDeleteClient = async (clientId: number) => {
     try {
@@ -87,17 +92,19 @@ export default function ClientsTable({
     { field: "phone", headerName: "Telefone", flex: 1, minWidth: 100 },
     { field: "address", headerName: "Endereço", flex: 3, minWidth: 200 },
     {
-      field: "actions",
-      headerName: "Ações",
-      type: "actions",
-      sortable: false,
-      filterable: false,
-      width: 80,
+      field: "edit",
+      headerName: "Editar",
+      width: 60,
       renderCell: (params: GridRenderCellParams) => (
-        <>
-          <EditClient client={params.row} onEdit={handleEditClient} />
-          <DeleteClient client={params.row} onDelete={handleDeleteClient} />
-        </>
+        <EditClient client={params.row} onEdit={handleEditClient} />
+      ),
+    },
+    {
+      field: "delete",
+      headerName: "Excluir",
+      width: 65,
+      renderCell: (params: GridRenderCellParams) => (
+        <DeleteClient client={params.row} onDelete={handleDeleteClient} />
       ),
     },
   ];

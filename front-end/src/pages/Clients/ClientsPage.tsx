@@ -1,15 +1,26 @@
 import { Box, Typography, Stack, Snackbar, Slide, Alert } from "@mui/material";
 import ClientsTable from "./components/ClientsTable";
 import UserMenu from "./components/UserMenu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddClient from "./components/AddClient";
 import { Client } from "@/types";
-import { createClient } from "../../services/clientService";
+import { createClient, getClients } from "../../services/clientService";
+import ClientsReportPDFDownloadButton from "./components/ClientsReportPDF";
 
 const ClientsPage = () => {
+  const [rows, setRows] = useState<Client[]>([]);
+  const [loading, setLoading] = useState(true);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [message, setMessage] = useState("Mensagem de teste");
   const [severity, setSeverity] = useState<"success" | "error">("success");
+
+  useEffect(() => {
+    getClients()
+      .then((data) => setRows(data))
+      .catch((err) => handleSnackbarOpen("Erro ao buscar clientes.", "error"))
+      .finally(() => setLoading(false));
+  }, []);
+
   const handleSnackbarOpen = (
     message: string,
     severity: "success" | "error"
@@ -76,11 +87,18 @@ const ClientsPage = () => {
         <Typography variant="h4">Clientes</Typography>
         <Stack direction="row" alignItems="center" spacing={2}>
           <AddClient onAdd={handleCreateClient} />
+          <ClientsReportPDFDownloadButton clients={rows} />
           <UserMenu />
         </Stack>
       </Stack>
       <Box sx={{ flexGrow: 1 }}>
-        <ClientsTable handleSnackbarOpen={handleSnackbarOpen} />
+        <ClientsTable
+          handleSnackbarOpen={handleSnackbarOpen}
+          rows={rows}
+          setRows={setRows}
+          loading={loading}
+          setLoading={setLoading}
+        />
       </Box>
     </Box>
   );

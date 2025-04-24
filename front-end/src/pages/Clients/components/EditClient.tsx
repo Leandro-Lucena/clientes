@@ -48,7 +48,7 @@ export default function EditClient({ client, onEdit }: EditClientProps) {
         address: client.address,
       });
     }
-  }, [open, client]);
+  }, [client.address, client.email, client.name, client.phone, open]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -117,17 +117,14 @@ export default function EditClient({ client, onEdit }: EditClientProps) {
     if (!isValid) return;
 
     setLoading(true);
-    try {
-      await onEdit(client.id, {
-        name: form.name,
-        email: form.email,
-        phone: form.phone,
-        address: form.address,
-      });
-      setOpen(false);
-    } finally {
-      setLoading(false);
-    }
+    await onEdit(client.id, {
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      address: form.address,
+    });
+    setOpen(false);
+    setLoading(false);
   };
 
   return (

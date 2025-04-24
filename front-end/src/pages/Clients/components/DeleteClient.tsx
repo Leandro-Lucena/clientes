@@ -13,19 +13,19 @@ import { useState } from "react";
 
 interface DeleteClientProps {
   client: Client;
-  onDelete: (clientId: number) => void;
+  onDelete: (clientId: number) => Promise<void>;
 }
 
 export default function DeleteClient({ client, onDelete }: DeleteClientProps) {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const handleDelete = async () => {
+  async function handleDelete() {
     setLoading(true);
-    onDelete(client.id);
+    await onDelete(client.id);
     setOpen(false);
     setLoading(false);
-  };
+  }
 
   return (
     <div>
