@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1745528223264" clover="3.2.0">
-  <project timestamp="1745528223264" name="All files">
+<coverage generated="1745533683943" clover="3.2.0">
+  <project timestamp="1745533683943" name="All files">
     <metrics statements="165" coveredstatements="90" conditionals="25" coveredconditionals="20" methods="17" coveredmethods="5" elements="207" coveredelements="115" complexity="0" loc="165" ncloc="165" packages="5" files="11" classes="11"/>
     <package name="src">
       <metrics statements="28" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-      <file name="app.ts" path="/home/leandro/clientes/back-end/src/app.ts">
+      <file name="app.ts" path="/mnt/bab157e6-e326-4679-ae65-76c369bcc4b2/USER/Documents/_PROJECTS/clientes/back-end/src/app.ts">
         <metrics statements="12" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -19,19 +19,19 @@
         <line num="20" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
       </file>
-      <file name="data-source.ts" path="/home/leandro/clientes/back-end/src/data-source.ts">
+      <file name="data-source.ts" path="/mnt/bab157e6-e326-4679-ae65-76c369bcc4b2/USER/Documents/_PROJECTS/clientes/back-end/src/data-source.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
       </file>
-      <file name="jest.config.ts" path="/home/leandro/clientes/back-end/src/jest.config.ts">
+      <file name="jest.config.ts" path="/mnt/bab157e6-e326-4679-ae65-76c369bcc4b2/USER/Documents/_PROJECTS/clientes/back-end/src/jest.config.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
       </file>
-      <file name="server.ts" path="/home/leandro/clientes/back-end/src/server.ts">
+      <file name="server.ts" path="/mnt/bab157e6-e326-4679-ae65-76c369bcc4b2/USER/Documents/_PROJECTS/clientes/back-end/src/server.ts">
         <metrics statements="10" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -47,7 +47,7 @@
     </package>
     <package name="src.controller">
       <metrics statements="71" coveredstatements="55" conditionals="22" coveredconditionals="17" methods="6" coveredmethods="4"/>
-      <file name="AuthController.ts" path="/home/leandro/clientes/back-end/src/controller/AuthController.ts">
+      <file name="AuthController.ts" path="/mnt/bab157e6-e326-4679-ae65-76c369bcc4b2/USER/Documents/_PROJECTS/clientes/back-end/src/controller/AuthController.ts">
         <metrics statements="30" coveredstatements="17" conditionals="5" coveredconditionals="2" methods="2" coveredmethods="1"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -80,7 +80,7 @@
         <line num="56" count="1" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
       </file>
-      <file name="ClientController.ts" path="/home/leandro/clientes/back-end/src/controller/ClientController.ts">
+      <file name="ClientController.ts" path="/mnt/bab157e6-e326-4679-ae65-76c369bcc4b2/USER/Documents/_PROJECTS/clientes/back-end/src/controller/ClientController.ts">
         <metrics statements="41" coveredstatements="38" conditionals="17" coveredconditionals="15" methods="4" coveredmethods="3"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -127,7 +127,7 @@
     </package>
     <package name="src.entity">
       <metrics statements="18" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="Client.ts" path="/home/leandro/clientes/back-end/src/entity/Client.ts">
+      <file name="Client.ts" path="/mnt/bab157e6-e326-4679-ae65-76c369bcc4b2/USER/Documents/_PROJECTS/clientes/back-end/src/entity/Client.ts">
         <metrics statements="11" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
@@ -141,7 +141,7 @@
         <line num="23" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
       </file>
-      <file name="User.ts" path="/home/leandro/clientes/back-end/src/entity/User.ts">
+      <file name="User.ts" path="/mnt/bab157e6-e326-4679-ae65-76c369bcc4b2/USER/Documents/_PROJECTS/clientes/back-end/src/entity/User.ts">
         <metrics statements="7" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
@@ -154,7 +154,7 @@
     </package>
     <package name="src.middleware">
       <metrics statements="19" coveredstatements="19" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
-      <file name="auth-middleware.ts" path="/home/leandro/clientes/back-end/src/middleware/auth-middleware.ts">
+      <file name="auth-middleware.ts" path="/mnt/bab157e6-e326-4679-ae65-76c369bcc4b2/USER/Documents/_PROJECTS/clientes/back-end/src/middleware/auth-middleware.ts">
         <metrics statements="19" coveredstatements="19" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="2" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
@@ -179,7 +179,7 @@
     </package>
     <package name="src.routes">
       <metrics statements="29" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
-      <file name="auth-routes.ts" path="/home/leandro/clientes/back-end/src/routes/auth-routes.ts">
+      <file name="auth-routes.ts" path="/mnt/bab157e6-e326-4679-ae65-76c369bcc4b2/USER/Documents/_PROJECTS/clientes/back-end/src/routes/auth-routes.ts">
         <metrics statements="8" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -190,7 +190,7 @@
         <line num="10" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
       </file>
-      <file name="client-routes.ts" path="/home/leandro/clientes/back-end/src/routes/client-routes.ts">
+      <file name="client-routes.ts" path="/mnt/bab157e6-e326-4679-ae65-76c369bcc4b2/USER/Documents/_PROJECTS/clientes/back-end/src/routes/client-routes.ts">
         <metrics statements="21" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>

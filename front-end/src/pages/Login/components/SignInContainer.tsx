@@ -1,7 +1,9 @@
 import { styled } from "@mui/material/styles";
 import Stack, { StackProps } from "@mui/material/Stack";
 
-export interface SignInContainerProps extends StackProps {}
+export interface SignInContainerProps extends StackProps {
+  "data-testid"?: string;
+}
 
 export const SignInContainer = styled(Stack)<SignInContainerProps>(
   ({ theme }) => ({
@@ -28,3 +30,7 @@ export const SignInContainer = styled(Stack)<SignInContainerProps>(
     },
   })
 );
+
+export const SignInContainerWithTestId = styled(SignInContainer)`
+  data-testid: "sign-in-container";
+`;
