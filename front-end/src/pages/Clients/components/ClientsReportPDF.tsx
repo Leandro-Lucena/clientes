@@ -51,7 +51,7 @@ interface Props {
   data: Client[];
 }
 
-const ClientsReportPDF: React.FC<Props> = ({ data }) => (
+export const ClientsReportPDF: React.FC<Props> = ({ data }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <Text style={{ fontSize: 14, marginBottom: 8 }}>

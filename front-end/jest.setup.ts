@@ -3,8 +3,14 @@ import {
   TextEncoder as NodeTextEncoder,
   TextDecoder as NodeTextDecoder,
 } from "util";
+import { config } from "dotenv";
+import { resolve } from "path";
+import fetchMock from "jest-fetch-mock";
 
-// Verifica se o tipo já existe e o substitui com o correto
+fetchMock.enableMocks();
+
+config({ path: resolve(__dirname, ".env.test") });
+
 if (typeof global.TextEncoder === "undefined") {
   global.TextEncoder = NodeTextEncoder;
 }

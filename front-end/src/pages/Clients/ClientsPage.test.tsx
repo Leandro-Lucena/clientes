@@ -3,6 +3,7 @@ import { exportPDF } from "./components/ClientsReportPDF";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ClientsPage from "./ClientsPage";
 import { getClients } from "../../services/clientService";
+import { MemoryRouter } from "react-router-dom";
 
 jest.mock("../../services/clientService");
 jest.mock("./components/ClientsReportPDF", () => ({
@@ -11,7 +12,11 @@ jest.mock("./components/ClientsReportPDF", () => ({
 
 const renderWithTheme = (component: React.ReactElement) => {
   const theme = createTheme();
-  return render(<ThemeProvider theme={theme}>{component}</ThemeProvider>);
+  return render(
+    <MemoryRouter>
+      <ThemeProvider theme={theme}>{component}</ThemeProvider>
+    </MemoryRouter>
+  );
 };
 
 describe("ClientsPage", () => {

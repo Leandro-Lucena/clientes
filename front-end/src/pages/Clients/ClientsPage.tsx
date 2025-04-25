@@ -7,6 +7,7 @@ import {
   Alert,
   Button,
 } from "@mui/material";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import ClientsTable from "./components/ClientsTable";
 import UserMenu from "./components/UserMenu";
 import { useEffect, useState } from "react";
@@ -14,6 +15,7 @@ import AddClient from "./components/AddClient";
 import { Client } from "@/types";
 import { createClient, getClients } from "../../services/clientService";
 import { exportPDF } from "./components/ClientsReportPDF";
+import { CustomBackground } from "../../components/CustomBackground";
 
 const ClientsPage = () => {
   const [rows, setRows] = useState<Client[]>([]);
@@ -77,14 +79,7 @@ const ClientsPage = () => {
   };
 
   return (
-    <Box
-      p={4}
-      sx={{
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <CustomBackground direction="column" justifyContent="space-between">
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
@@ -114,9 +109,12 @@ const ClientsPage = () => {
         mb={2}
       >
         <Typography variant="h4">Clientes</Typography>
-        <Stack direction="row" alignItems="center" spacing={2}>
+        <Stack direction="row" alignItems="center" spacing={3}>
           <AddClient onAdd={handleCreateClient} />
-          <Button onClick={handleExportPDF}>Exportar PDF</Button>
+          <Button onClick={handleExportPDF} variant="contained" color="inherit">
+            <PictureAsPdfIcon fontSize="small" sx={{ mr: 1 }} color="error" />
+            Exportar PDF
+          </Button>
           <UserMenu />
         </Stack>
       </Stack>
@@ -128,7 +126,7 @@ const ClientsPage = () => {
           loading={loading}
         />
       </Box>
-    </Box>
+    </CustomBackground>
   );
 };
 

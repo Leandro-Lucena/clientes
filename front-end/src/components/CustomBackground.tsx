@@ -1,11 +1,11 @@
 import { styled } from "@mui/material/styles";
 import Stack, { StackProps } from "@mui/material/Stack";
 
-export interface SignInContainerProps extends StackProps {
+export interface CustomBackgroundProps extends StackProps {
   "data-testid"?: string;
 }
 
-export const SignInContainer = styled(Stack)<SignInContainerProps>(
+export const CustomBackground = styled(Stack)<CustomBackgroundProps>(
   ({ theme }) => ({
     position: "relative",
     height: "calc((1 - var(--template-frame-height, 0)) * 100dvh)",
@@ -31,6 +31,6 @@ export const SignInContainer = styled(Stack)<SignInContainerProps>(
   })
 );
 
-export const SignInContainerWithTestId = styled(SignInContainer)`
-  data-testid: "sign-in-container";
+export const CustomBackgroundWithTestId = styled(CustomBackground)`
+  data-testid: "custom-background";
 `;

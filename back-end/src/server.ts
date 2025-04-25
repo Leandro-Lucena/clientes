@@ -1,4 +1,4 @@
-import "reflect-metadata"; // Necessário para o TypeORM
+import "reflect-metadata";
 import { AppDataSource } from "./data-source";
 import app from "./app";
 import { AuthController } from "./controller/AuthController";

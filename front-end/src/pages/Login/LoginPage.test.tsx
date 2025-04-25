@@ -1,4 +1,3 @@
-// LoginPage.test.tsx
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import LoginPage from "./LoginPage";
 import { BrowserRouter } from "react-router-dom";

@@ -46,7 +46,12 @@ export default function DeleteClient({ client, onDelete }: DeleteClientProps) {
           {loading && <CircularProgress />}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} disabled={loading}>
+          <Button
+            onClick={() => setOpen(false)}
+            disabled={loading}
+            variant="outlined"
+            color="inherit"
+          >
             Cancelar
           </Button>
           <Button

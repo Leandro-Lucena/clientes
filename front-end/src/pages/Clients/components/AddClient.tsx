@@ -121,11 +121,12 @@ export default function AddClient({ onAdd }: AddClientProps) {
   return (
     <>
       <Button
-        aria-label="adicionar cliente"
+        aria-label="novo cliente"
         variant="contained"
+        color="inherit"
         onClick={() => setOpen(true)}
       >
-        <AddIcon fontSize="small" /> Novo Cliente
+        <AddIcon fontSize="small" sx={{ mr: 1 }} /> Novo Cliente
       </Button>
 
       <Dialog
@@ -220,7 +221,12 @@ export default function AddClient({ onAdd }: AddClientProps) {
             </Box>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setOpen(false)} disabled={loading}>
+            <Button
+              onClick={() => setOpen(false)}
+              disabled={loading}
+              variant="outlined"
+              color="inherit"
+            >
               Cancelar
             </Button>
             <Button type="submit" disabled={loading} variant="contained">

@@ -1,4 +1,4 @@
-import { styled } from "@mui/material/styles";
+import { alpha, styled } from "@mui/material/styles";
 import MuiCard, { CardProps as MuiCardProps } from "@mui/material/Card";
 
 export interface StyledCardProps extends MuiCardProps {}
@@ -12,6 +12,7 @@ export const StyledCard = styled(MuiCard)<StyledCardProps>(({ theme }) => ({
   padding: theme.spacing(4),
   gap: theme.spacing(2),
   margin: "auto",
+  backgroundColor: alpha(theme.palette.background.paper, 0.3),
   [theme.breakpoints.up("sm")]: {
     maxWidth: "450px",
   },

@@ -8,7 +8,7 @@ import { ColorModeContext } from "../../theme/ColorModeContext";
 import { login } from "../../services/authService";
 import { FormEvent, useContext, useState } from "react";
 import { LoginSnackbarError } from "./components/LoginSnackbarError";
-import { SignInContainer } from "./components/SignInContainer";
+import { CustomBackground } from "../../components/CustomBackground";
 import { StyledCard } from "./components/StyledCard";
 import { ThemeSwitch } from "../../components/ThemeSwitch";
 import { useNavigate } from "react-router-dom";
@@ -71,7 +71,7 @@ export default function LoginPage() {
   };
 
   return (
-    <SignInContainer direction="column" justifyContent="space-between">
+    <CustomBackground direction="column" justifyContent="space-between">
       <LoginSnackbarError
         open={openSnackbar}
         message={snackbarMessage}
@@ -146,6 +146,6 @@ export default function LoginPage() {
           </Button>
         </Box>
       </StyledCard>
-    </SignInContainer>
+    </CustomBackground>
   );
 }

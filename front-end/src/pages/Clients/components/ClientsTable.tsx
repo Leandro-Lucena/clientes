@@ -4,6 +4,7 @@ import { Client } from "@/types";
 import { deleteClient, updateClient } from "../../../services/clientService";
 import DeleteClient from "./DeleteClient";
 import EditClient from "./EditClient";
+import { alpha, useTheme } from "@mui/material";
 
 interface ClientsTableProps {
   handleSnackbarOpen: (message: string, severity: "success" | "error") => void;
@@ -18,6 +19,7 @@ export default function ClientsTable({
   setRows,
   loading,
 }: ClientsTableProps) {
+  const theme = useTheme();
   const handleDeleteClient = async (clientId: number) => {
     try {
       const response = await deleteClient(clientId);
@@ -77,14 +79,21 @@ export default function ClientsTable({
   ];
 
   return (
-    <Paper sx={{ height: "100%", width: "100%" }}>
+    <Paper sx={{ height: "100%", width: "100%", background: "transparent" }}>
       <DataGrid
         rows={rows}
         columns={columns}
         loading={loading}
         autoPageSize
-        sx={{ border: 0 }}
+        sx={{
+          border: 1,
+          backgroundColor: alpha(theme.palette.background.paper, 0.7),
+          borderColor: "#444",
+          borderRadius: 2,
+        }}
         disableColumnMenu
+        disableRowSelectionOnClick
+        disableMultipleRowSelection
         getRowId={(row) => row.id}
         localeText={{
           paginationDisplayedRows: ({ from, to, count }) =>
