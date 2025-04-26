@@ -104,7 +104,7 @@ docker-compose up --build
 
 ### Acessar:
 
-- Entre pelo navegador no endereço: http://localhost:3000
+- Entre pelo navegador no endereço: http://localhost (ou http://localhost:80)
 - Faça login com as credenciais: `usuário: admin, senha: admin`
 - Agora cadastre, edite e exporte uma lista em PDF dos seus clientes.
 
