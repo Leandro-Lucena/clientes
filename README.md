@@ -105,8 +105,25 @@ docker-compose up --build
 ### Acessar:
 
 - Entre pelo navegador no endereço: http://localhost:3000
-- Faça login com as credenciais: `usuário: admin, senha: admin`
+- Faça login com as credenciais:
+  - Usuário: `admin`
+  - Senha: `admin`
 - Agora cadastre, edite e exporte uma lista em PDF dos seus clientes.
+
+---
+
+## 🌐 Teste Online via Render
+
+O projeto também está disponível para testes online:
+
+- https://clientes-2.onrender.com
+
+- Faça login com as credenciais:
+  - Usuário: `admin`
+  - Senha: `admin`
+
+Observação:
+Os serviços gratuitos do Render podem levar alguns segundos para iniciar ("cold start").
 
 ---
 
