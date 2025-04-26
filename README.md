@@ -145,4 +145,4 @@ npm test
 
 ## ✅ Concluindo...
 
-Este projeto foi construido com foco em boas práticas de desenvolvimento full stack, integração entre frontend e backend, e organização de código escalável. A implementação de testes, autenticação JWT, exportação de PDF e containerização Docker demonstra o compromisso com qualidade, manutenção e facilidade de deploy. Sinta-se à vontade para contribuir, sugerir melhorias ou utilizá-lo como base para projetos futuros.
+Este projeto foi construido com foco em boas práticas de desenvolvimento full stack, integração entre frontend e backend, e organização de código escalável. A implementação de testes, autenticação JWT e containerização Docker foi pensando em entregar qualidade, facilitar a manutenção e o deploy.
