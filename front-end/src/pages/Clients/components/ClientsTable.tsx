@@ -98,6 +98,7 @@ export default function ClientsTable({
         localeText={{
           paginationDisplayedRows: ({ from, to, count }) =>
             `${from} até ${to} de ${count}`,
+          noRowsLabel: "Nenhum cliente encontrado",
         }}
       />
     </Paper>
