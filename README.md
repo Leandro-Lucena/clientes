@@ -1,18 +1,20 @@
-# Sistema de Gerenciamento de Clientes
+# Customer Management System
 
-## ✨ O Projeto
+[🇧🇷 Em Português](README.br.md)
 
-Aplicativo de cadastro de clientes feito com frontend em React + TypeScript e backend em Node.js + PostgreSQL. O sistema permite login autenticado, cadastro, edição e listagem de clientes, com opção para exportar em PDF uma lista de todos os clientes. Utilizado autenticação para proteção de rotas, e foi utilizado Docker para containerizar a aplicação.
+## ✨ The Project
 
-## 🚀 Tecnologias Utilizadas
+A customer registration application built with a React + TypeScript frontend and a Node.js + PostgreSQL backend. The system allows authenticated login, customer registration, editing, and listing, with an option to export a list of all customers to PDF. Authentication is used to protect routes, and Docker was used to containerize the application.
+
+## 🚀 Technologies Used
 
 ### Frontend:
 
 - React + TypeScript
 - Material UI
 - React Router
-- react-pdf (geração de PDF)
-- Jest (testes unitários)
+- react-pdf (PDF generation)
+- Jest (unit tests)
 
 ### Backend:
 
@@ -20,7 +22,7 @@ Aplicativo de cadastro de clientes feito com frontend em React + TypeScript e ba
 - Express
 - TypeORM
 - PostgreSQL
-- JWT para autenticação e proteção de rotas
+- JWT for authentication and route protection
 
 ### DevOps:
 
@@ -29,120 +31,120 @@ Aplicativo de cadastro de clientes feito com frontend em React + TypeScript e ba
 
 ---
 
-## 📌 API - Endpoints Disponíveis no Backend (porta 5000)
+## 📌 API - Available Backend Endpoints (port 5000)
 
-### Autenticação:
+### Authentication:
 
 ```
 POST /login
-→ Corpo: { username: string, password: string }
-→ Retorna: token JWT
+→ Body: { username: string, password: string }
+→ Return: token JWT
 ```
 
-### Clientes (protegido com JWT):
+### Clients (protegido com JWT):
 
 ```
 GET /clients
-→ Lista todos os clientes
+→ Lists all clients
 
 POST /clients
-→ Cria um novo cliente
-→ Corpo: { name, email, phone, address }
+→ Creates a new client
+→ Body: { name, email, phone, address }
 
 PUT /clients/:id
-→ Atualiza um cliente existente
-→ Corpo: { name, email, phone, address }
+→ Updates an existing client
+→ Body: { name, email, phone, address }
 
 DELETE /clients/:id
-→ Remove um cliente existente
+→ Removes an existing client
 ```
 
 ---
 
-## ⚖️ Funcionalidades
+## ⚖️ Features
 
-### Autenticação
+### Authentication
 
-- Usuário fixo: `admin`
-- Senha fixa: `admin`
+- Fixed user: `admin`
+- Fixed password: `admin`
 
-### Cadastro de Clientes
+### Customer Registration
 
-- Campos: Nome, E-mail, Telefone, Endereço
-- CRUD completo (criar, listar, editar, deletar)
+- Fields: Name, Email, Phone, Address
+- Full CRUD (create, list, edit, delete)
 
-### Listagem
+### Listing
 
-- Tabela com dados dos clientes
-- Botão para exportar a lista em PDF (via `react-pdf`)
+- Table with customer data
+- Button to export the list to PDF (via `react-pdf`)
 
 ---
 
-## 📆 Instruções para Execução
+## 📆 Setup Instructions
 
-### Requisitos:
+### Requirements:
 
 - Node.js >= 18
 - Docker
 
-### Passos:
+### Steps:
 
 ```bash
-# Clone o repositório
-git clone https://github.com/Leandro-Lucena/clientes
+# Clone the repository
+git clone https://github.com/Leandro-Lucena/clients
 
-# Entre na pasta do repositório clonado
-cd clientes
+# Enter the cloned repository folder
+cd clients
 
-# Renomeie os arquivos de variáveis de ambiente de ".env.example" para ".env"
+# Rename the environment variable files from ".env.example" to ".env"
 mv frontend/.env.example frontend/.env
 mv backend/.env.example backend/.env
 
-# Suba os containers
+# Start the containers
 docker-compose up --build
 ```
 
-### Acessar:
+### Access:
 
-- Entre pelo navegador no endereço: http://localhost:3000
-- Faça login com as credenciais:
-  - Usuário: `admin`
-  - Senha: `admin`
-- Agora cadastre, edite e exporte uma lista em PDF dos seus clientes.
+- Open your browser and go to: http://localhost:3000
+- Log in with the credentials:
+  - User: `admin`
+  - Password: `admin`
+- Now you can register, edit, and export a PDF list of your customers.
 
 ---
 
-## 🌐 Teste Online via Render
+## 🌐 Online Test via Render
 
-O projeto também está disponível para testes online:
+The project is also available for online testing:
 
 - https://clientes-2.onrender.com
 
-- Faça login com as credenciais:
-  - Usuário: `admin`
-  - Senha: `admin`
+- Log in with the credentials:
+  - User: `admin`
+  - Password: `admin`
 
-Observação:
-Os serviços gratuitos do Render podem levar alguns segundos para iniciar ("cold start").
+Note:
+Render's free services may take a few seconds to start ("cold start").
 
 ---
 
-## 🔧 Testes (Jest)
+## 🔧 Tests (Jest)
 
 ```bash
-# Rodar testes no frontend
+# Run frontend tests
 cd front-end
 npm test
 ```
 
 ```bash
-# Rodar testes no backend
+# Run backend tests
 cd back-end
 npm test
 ```
 
 ---
 
-## ✅ Concluindo...
+## ✅ Conclusion...
 
-Este projeto foi construido com foco em boas práticas de desenvolvimento full stack, integração entre frontend e backend, e organização de código escalável. A implementação de testes, autenticação JWT e containerização Docker foi pensando em entregar qualidade, facilitar a manutenção e o deploy.
+This project was built with a focus on good full-stack development practices, frontend and backend integration, and scalable code organization. The implementation of tests, JWT authentication, and Docker containerization was designed to deliver quality, facilitate maintenance, and deployment.
